@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
 router.post('/',upload.single('user_img'),async (req,res,next)=>{
     let kakao= req.body.kakao_idx;
     let nickname = req.body.user_nickname;
-    let sex = req.body.user_sex;
+    //let sex = req.body.user_sex;
     let img = req.file.location;
     console.log(kakao,nickname,sex);
     let token;
@@ -22,7 +22,7 @@ router.post('/',upload.single('user_img'),async (req,res,next)=>{
     console.log(req.file);
 
 
-    if(!kakao || !nickname ||!sex){//유저 들어왔는가
+    if(!kakao || !nickname ){//유저 들어왔는가
         res.status(400).send({
             message:"Null Value"
         });
@@ -38,8 +38,8 @@ router.post('/',upload.single('user_img'),async (req,res,next)=>{
                 message:"Already Exists"
             });
         }else{
-            let insertQuery = `INSERT INTO user (kakao_idx, user_nickname, user_sex,user_img) VALUES (?,?,?,?) `;
-            let insertResult = await db.queryParamArr(insertQuery,[kakao,nickname,sex,img]);
+            let insertQuery = `INSERT INTO user (kakao_idx, user_nickname, user_img) VALUES (?,?,?) `;
+            let insertResult = await db.queryParamArr(insertQuery,[kakao,nickname,img]);
             if(!insertResult){
                 res.status(500).send({
                     message:"Internal Server Error"
