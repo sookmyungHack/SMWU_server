@@ -5,6 +5,14 @@ const crypto = require('crypto-promise');
 const jwt = require('../../../module/jwt');
 const schedule = require('node-schedule');
 
+// bookmark 라우터 정의
+const bookmarkRouter = require('./bookmark/bookmark');
+router.use('/bookmark',bookmarkRouter);
+
+//detail 라우터 정의
+const detailRouter = require('./detail/detail');
+router.use('/detail',detailRouter);
+
 
 
 router.get('/recommand', async (req, res, next) => {
@@ -53,7 +61,7 @@ ORDER BY sign_like desc limit 1;`;
             message:"Internal Server Error"
         })
     }
-    res.status(200).send({
+    res.status(201).send({
         recommandFund : Result1[0],
         recommandBoycott : Result2[0],
         recommandParty : Result3[0],
@@ -110,7 +118,7 @@ router.get('/new',async(req,res,next)=>{
             message:"Internal Server Error"
         });
     }else{
-        res.status(200).send({
+        res.status(201).send({
             message:"Success",
             data:Result7
         })
@@ -178,7 +186,7 @@ router.get('/popular',async(req,res,next)=>{
             message:"Internal Server Error"
         });
     }else{
-        res.status(200).send({
+        res.status(201).send({
             message:"Success ",
             data:Result7
         })

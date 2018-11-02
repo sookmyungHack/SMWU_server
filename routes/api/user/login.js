@@ -60,7 +60,7 @@ router.post('/',async (req,res,next)=>{
                 message:"Internal Server Error"
             });
         }else{
-            res.status(201).send({
+            res.status(200).send({
                 token : token,
                 message:"Success Signup"
             });
