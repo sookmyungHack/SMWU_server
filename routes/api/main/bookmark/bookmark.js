@@ -30,6 +30,7 @@ router.post('/add',async(req,res,next)=>{
             `;
             selectResult = await db.queryParamArr(selectQuery,[boardIdx]);
             if(selectResult.length<1){
+                console.log(000);
                 res.status(500).send({
                     message:"No content"
                 });
@@ -39,10 +40,12 @@ router.post('/add',async(req,res,next)=>{
                 `
                 insertResult = await db.queryParamArr(insertQuery,[boardIdx,decoded.user_idx])
                 if(!insertResult){
+                    console.log(001);
                     res.status(500).send({
                         message:"Internal Server Error"
                     })
                 }else if(insertResult.length>=1){
+                    console.log(002);
                     res.status(500).send({
                         message:"Already Exist"
                     })
@@ -52,6 +55,7 @@ router.post('/add',async(req,res,next)=>{
                 WHERE finance_idx = ? `
                 insertResult = await db.queryParamArr(insertQuery,[boardIdx,boardIdx]);
                 if(!insertResult){
+                    console.log(004);
                     res.status(500).send({
                         message:"Internal Server Error"
                     })
@@ -74,6 +78,7 @@ router.post('/add',async(req,res,next)=>{
             `;
             selectResult = await db.queryParamArr(selectQuery,[boardIdx]);
             if(selectResult.length<1){
+                console.log(005);
                 res.status(500).send({
                     message:"No content"
                 });
@@ -83,10 +88,12 @@ router.post('/add',async(req,res,next)=>{
                 `
                 insertResult = await db.queryParamArr(insertQuery,[boardIdx,decoded.user_idx])
                 if(!insertResult){
+                    console.log(006);
                     res.status(500).send({
                         message:"Internal Server Error"
                     })
                 }else if(insertResult.length>=1){
+                    console.log(007);
                     res.status(500).send({
                         message:"Already Exist"
                     })
@@ -96,6 +103,7 @@ router.post('/add',async(req,res,next)=>{
                 WHERE party_idx = ? `
                 insertResult = await db.queryParamArr(insertQuery,[boardIdx,boardIdx]);
                 if(!insertResult){
+                    console.log(8);
                     res.status(500).send({
                         message:"Internal Server Error"
                     })
@@ -117,6 +125,7 @@ router.post('/add',async(req,res,next)=>{
             `;
             selectResult = await db.queryParamArr(selectQuery,[boardIdx]);
             if(selectResult.length<1){
+                console.log(9);
                 res.status(500).send({
                     message:"No content"
                 });
@@ -126,10 +135,12 @@ router.post('/add',async(req,res,next)=>{
                 `
                 insertResult = await db.queryParamArr(insertQuery,[boardIdx,decoded.user_idx])
                 if(!insertResult){
+                    console.log(10);
                     res.status(500).send({
                         message:"Internal Server Error"
                     })
                 }else if(insertResult.length>=1){
+                    console.log(11);
                     res.status(500).send({
                         message:"Already Exist"
                     })
@@ -139,6 +150,7 @@ router.post('/add',async(req,res,next)=>{
                 WHERE sign_idx = ? `
                 insertResult = await db.queryParamArr(insertQuery,[boardIdx,boardIdx]);
                 if(!insertResult){
+                    console.log(12);
                     res.status(500).send({
                         message:"Internal Server Error"
                     })
@@ -160,6 +172,7 @@ router.post('/add',async(req,res,next)=>{
             `;
             selectResult = await db.queryParamArr(selectQuery,[boardIdx]);
             if(selectResult.length<1){
+                console.log(13);
                 res.status(500).send({
                     message:"No content"
                 });
@@ -169,10 +182,12 @@ router.post('/add',async(req,res,next)=>{
                 `
                 insertResult = await db.queryParamArr(insertQuery,[boardIdx,decoded.user_idx])
                 if(!insertResult){
+                    console.log(14);
                     res.status(500).send({
                         message:"Internal Server Error"
                     })
                 }else if(insertResult.length>=1){
+                    console.log(15);
                     res.status(500).send({
                         message:"Already Exist"
                     })
@@ -182,6 +197,7 @@ router.post('/add',async(req,res,next)=>{
                 WHERE boycott_idx = ? `
                 insertResult = await db.queryParamArr(insertQuery,[boardIdx,boardIdx]);
                 if(!insertResult){
+                    console.log(16);
                     res.status(500).send({
                         message:"Internal Server Error"
                     })
@@ -203,6 +219,7 @@ router.post('/add',async(req,res,next)=>{
             `;
             selectResult = await db.queryParamArr(selectQuery,[boardIdx]);
             if(selectResult.length<1){
+                console.log(17);
                 res.status(500).send({
                     message:"No content"
                 });
@@ -212,10 +229,12 @@ router.post('/add',async(req,res,next)=>{
                 `
                 insertResult = await db.queryParamArr(insertQuery,[boardIdx,decoded.user_idx])
                 if(!insertResult){
+                    console.log(18);
                     res.status(500).send({
                         message:"Internal Server Error"
                     })
                 }else if(insertResult.length>=1){
+                    console.log(19);
                     res.status(500).send({
                         message:"Already Exist"
                     })
@@ -226,6 +245,7 @@ router.post('/add',async(req,res,next)=>{
                 WHERE donate_idx = ? `
                 insertResult = await db.queryParamArr(insertQuery,[boardIdx,boardIdx]);
                 if(!insertResult){
+                    console.log(20);
                     res.status(500).send({
                         message:"Internal Server Error"
                     })
