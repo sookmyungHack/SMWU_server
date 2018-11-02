@@ -6,6 +6,7 @@ const jwt = require('../../../module/jwt');
 const upload = require('../../../config/s3multer').uploadImage;
 
 
+
 /* GET home page. */
 router.get('/', (req, res, next) => {
     res.render('index', { title: 'Express' });
@@ -19,6 +20,7 @@ router.post('/',async (req,res,next)=>{
     console.log(kakao,nickname);
     let token;
     let userIdx;
+    
 
 
     if(!kakao || !nickname ){//유저 들어왔는가

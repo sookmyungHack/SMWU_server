@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../../../module/db')
 const crypto = require('crypto-promise');
 const jwt = require('../../../module/jwt');
+const schedule = require('node-schedule');
 
 
 
@@ -60,6 +61,77 @@ ORDER BY sign_like desc limit 1;`;
         recommandDonate : Result5[0]
     });
     
+});
+/*
+router.get('/new',async(req,res,next)=>{
+
+});*/
+
+
+router.get('/popular',async(req,res,next)=>{
+    let Result1;
+    let Result2;
+    let Result3;
+    let Result4;
+    let Result5;
+    let Result6;
+    let Result7;
+
+        let populQuery0 = `
+        DROP TABLE popular_list
+        `;
+        
+
+    
+        
+        let populQuery1 = `
+        CREATE TABLE popular_list AS
+        SELECT finance_title AS title, 
+            finance_idx AS index1,
+            finance_img AS img ,
+            finance_like AS booked ,
+            0 AS 'category' 
+        FROM SMWU.finance;
+        `;
+        let populQuery2 = `
+        INSERT INTO popular_list
+        (title, index1, img, booked, category)
+        SELECT party_title, party_idx, party_img, party_like, 1 AS 'category'
+        FROM SMWU.party
+        `;
+        let populQuery3 = `INSERT INTO popular_list
+        (title, index1, img, booked, category)
+        SELECT sign_title, sign_idx, sign_img, sign_like, 2 AS 'category'
+        FROM SMWU.sign;`;
+        let populQuery4 = `INSERT INTO popular_list
+        (title, index1, img, booked, category)
+        SELECT boycott_title, boycott_idx, boycott_img, boycott_like, 3 AS 'category'
+        FROM SMWU.boycott`;
+        let populQuery5 = `INSERT INTO popular_list
+        (title, index1, img, booked, category)
+        SELECT donate_title, donate_idx, donate_img, donate_like, 4 AS 'category'
+        FROM SMWU.donate;`;
+    
+    Result1 = await db.queryParamNone(populQuery0);
+    Result2 = await db.queryParamNone(populQuery1);
+    Result3 = await db.queryParamNone(populQuery2);
+    Result4 = await db.queryParamNone(populQuery3);
+    Result5 = await db.queryParamNone(populQuery4);
+    Result6 = await db.queryParamNone(populQuery5);
+    let selectQuery = `SELECT * FROM popular_list ORDER BY booked desc limit 6 `;
+    Result7 = await db.queryParamNone(selectQuery);
+    if(!Result7){
+        res.status(500).send({
+            message:"Internal Server Error"
+        });
+    }else{
+        res.status(200).send({
+            message:"Success ",
+            data:Result7
+        })
+    }
+
+
 });
 
 module.exports = router;
