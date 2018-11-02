@@ -19,6 +19,7 @@ router.post('/',upload.single('user_img'),async (req,res,next)=>{
     console.log(kakao,nickname,sex);
     let token;
     let userIdx;
+    console.log(req.file);
 
 
     if(!kakao || !nickname ||!sex){//유저 들어왔는가
