@@ -47,7 +47,8 @@ router.post('/',async (req,res,next)=>{
                 })
             }
             userIdx = insertResult.insertId;
-            token = jwt.sign(kakao);
+            console.log(userIdx);
+            token = jwt.sign(userIdx);
 
             let insertTokenQuery =
 		`

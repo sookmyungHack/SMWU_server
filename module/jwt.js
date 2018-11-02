@@ -5,7 +5,7 @@ const secretKey = require('../config/secretKey.js').secret;
 
 module.exports = {
 
-    sign : function(kakao_idx) {
+    sign : function(user_idx) {
         //옵션
         const options = {
             algorithm : "HS256",
@@ -14,7 +14,7 @@ module.exports = {
 
         //페이로드
         const payload = {
-            kakao_idx : kakao_idx
+            user_idx : user_idx
         };
 
         //토큰 생성
