@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../../../module/db')
 const crypto = require('crypto-promise');
 const jwt = require('../../../module/jwt');
+const upload = require('../../../config/s3multer').uploadImage;
 
 
 /* GET home page. */
@@ -10,10 +11,11 @@ router.get('/', (req, res, next) => {
     res.render('index', { title: 'Express' });
 });
 
-router.post('/',async (req,res,next)=>{
+router.post('/',upload.single('user_img'),async (req,res,next)=>{
     let kakao= req.body.kakao_idx;
     let nickname = req.body.user_nickname;
     let sex = req.body.user_sex;
+    let img = req.file.location;
     console.log(kakao,nickname,sex);
     let token;
     let userIdx;
@@ -35,8 +37,8 @@ router.post('/',async (req,res,next)=>{
                 message:"Already Exists"
             });
         }else{
-            let insertQuery = `INSERT INTO user (kakao_idx, user_nickname, user_sex) VALUES (?,?,?) `;
-            let insertResult = await db.queryParamArr(insertQuery,[kakao,nickname,sex]);
+            let insertQuery = `INSERT INTO user (kakao_idx, user_nickname, user_sex,user_img) VALUES (?,?,?,?) `;
+            let insertResult = await db.queryParamArr(insertQuery,[kakao,nickname,sex,img]);
             if(!insertResult){
                 res.status(500).send({
                     message:"Internal Server Error"
@@ -56,6 +58,7 @@ router.post('/',async (req,res,next)=>{
             });
         }else{
             res.status(201).send({
+                token : token,
                 message:"Success Signup"
             });
         }
