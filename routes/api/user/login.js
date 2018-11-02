@@ -11,11 +11,11 @@ router.get('/', (req, res, next) => {
     res.render('index', { title: 'Express' });
 });
 
-router.post('/',upload.single('user_img'),async (req,res,next)=>{
+router.post('/',async (req,res,next)=>{
     let kakao= req.body.kakao_idx;
     let nickname = req.body.user_nickname;
     //let sex = req.body.user_sex;
-    let img = req.file.location;
+    let img = req.body.user_img;
     console.log(kakao,nickname,sex);
     let token;
     let userIdx;
