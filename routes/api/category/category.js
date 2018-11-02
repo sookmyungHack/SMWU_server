@@ -16,9 +16,9 @@ router.get('/', async (req, res, next) => {
         console.log(0);
         selectQuery = `SELECT *
         FROM (SELECT user_nickname, user_idx FROM user) AS user
-        JOIN(SELECT user_idx, timestampdiff(day, now(),finance_limit) AS date, finance_idx,finance_person,finance_count FROM SMWU.finance) AS finance
+        JOIN(SELECT user_idx, timestampdiff(day, now(),finance_limit) AS date, finance_idx AS idx,finance_person AS LimitPerson,finance_count AS CurrentPerson FROM SMWU.finance) AS finance
         ON user.user_idx = finance.user_idx
-        GROUP BY finance.finance_idx`;
+        GROUP BY finance.idx`;
         console.log(selectQuery);
         
         selectResult = await db.queryParamNone(selectQuery);
@@ -28,9 +28,9 @@ router.get('/', async (req, res, next) => {
         console.log(111);
         selectQuery = `SELECT *
         FROM (SELECT user_nickname, user_idx FROM user) AS user
-        JOIN(SELECT user_idx, timestampdiff(day, now(),party_limit) AS date, party_idx,party_person,party_count FROM SMWU.party) AS party
+        JOIN(SELECT user_idx, timestampdiff(day, now(),party_limit) AS date, party_idx as idx ,party_person as LimitPerson,party_count AS CurrentPerson FROM SMWU.party) AS party
         ON user.user_idx = party.user_idx
-        GROUP BY party.party_idx`
+        GROUP BY party.idx`
         
         console.log(selectQuery);
         selectResult = await db.queryParamNone(selectQuery);
@@ -39,9 +39,9 @@ router.get('/', async (req, res, next) => {
         
         selectQuery = `SELECT *
         FROM (SELECT user_nickname, user_idx FROM user) AS user
-        JOIN(SELECT user_idx, timestampdiff(day, now(),sign_limit) AS date, sign_idx, sign_person, sign_count FROM SMWU.sign) AS sign
+        JOIN(SELECT user_idx, timestampdiff(day, now(),sign_limit) AS date, sign_idx AS idx , sign_person AS LimitPerson, sign_count AS CurrentPerson FROM SMWU.sign) AS sign
         ON user.user_idx = sign.user_idx
-        GROUP BY sign.sign_idx`
+        GROUP BY sign.idx`
         console.log(selectQuery);
         selectResult = await db.queryParamNone(selectQuery);
         break;
@@ -49,9 +49,9 @@ router.get('/', async (req, res, next) => {
         case "3" :
         selectQuery = `SELECT *
         FROM (SELECT user_nickname, user_idx FROM user) AS user
-        JOIN(SELECT user_idx, timestampdiff(day, now(),boycott_limit) AS date, boycott_idx, boycott_person,boycott_count FROM SMWU.boycott) AS boycott
+        JOIN(SELECT user_idx, timestampdiff(day, now(),boycott_limit) AS date, boycott_idx  AS idx, boycott_person AS LimitPerson,boycott_count AS CurrentPerson FROM SMWU.boycott) AS boycott
         ON user.user_idx = boycott.user_idx
-        GROUP BY boycott.boycott_idx`
+        GROUP BY boycott.idx`
         console.log(selectQuery);
         selectResult = await db.queryParamNone(selectQuery);
         break;
@@ -59,9 +59,9 @@ router.get('/', async (req, res, next) => {
         case "4" :
         selectQuery = `SELECT *
         FROM (SELECT user_nickname, user_idx FROM user) AS user
-        JOIN(SELECT user_idx, timestampdiff(day, now(),donate_limit) AS date, donate_idx, donate_person, donate_count FROM SMWU.donate) AS donate
+        JOIN(SELECT user_idx, timestampdiff(day, now(),donate_limit) AS date, donate_idx AS idx, donate_person AS LimitPerson, donate_count AS CurrentPerson FROM SMWU.donate) AS donate
         ON user.user_idx = donate.user_idx
-        GROUP BY donate.donate_idx`
+        GROUP BY donate.idx`
         console.log(selectQuery);
         selectResult = await db.queryParamNone(selectQuery);
         console.log(selectResult)
