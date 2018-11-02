@@ -16,7 +16,7 @@ router.post('/',async (req,res,next)=>{
     let nickname = req.body.user_nickname;
     //let sex = req.body.user_sex;
     let img = req.body.user_img;
-    console.log(kakao,nickname,sex);
+    console.log(kakao,nickname);
     let token;
     let userIdx;
     console.log(req.file);
