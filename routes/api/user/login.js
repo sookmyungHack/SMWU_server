@@ -19,7 +19,6 @@ router.post('/',async (req,res,next)=>{
     console.log(kakao,nickname);
     let token;
     let userIdx;
-    console.log(req.file);
 
 
     if(!kakao || !nickname ){//유저 들어왔는가
