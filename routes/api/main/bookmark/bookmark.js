@@ -26,12 +26,12 @@ router.post('/add',async(req,res,next)=>{
             case "0" :
             console.log(1);
             selectQuery = `
-            SELECT * FROM finance WHERE user_idx =? AND finance_idx =?
+            SELECT * FROM finance WHERE finance_idx =?
             `;
-            selectResult = await db.queryParamArr(selectQuery,[decoded.user_idx,boardIdx]);
-            if(selectResult.length>=1){
+            selectResult = await db.queryParamArr(selectQuery,[boardIdx]);
+            if(selectResult.length<1){
                 res.status(500).send({
-                    message:"Already Exist"
+                    message:"No content"
                 });
             }else{
                 insertQuery = `
@@ -70,12 +70,12 @@ router.post('/add',async(req,res,next)=>{
             break;
             case "1" :
             selectQuery = `
-            SELECT * FROM party WHERE user_idx =? AND party_idx =?
+            SELECT * FROM party WHERE party_idx =?
             `;
-            selectResult = await db.queryParamArr(selectQuery,[decoded.user_idx,boardIdx]);
-            if(selectResult.length>=1){
+            selectResult = await db.queryParamArr(selectQuery,[boardIdx]);
+            if(selectResult.length<1){
                 res.status(500).send({
-                    message:"Already Exist"
+                    message:"No content"
                 });
             }else{
                 insertQuery = `
@@ -113,12 +113,12 @@ router.post('/add',async(req,res,next)=>{
             break;
             case "2" :
             selectQuery = `
-            SELECT * FROM sign WHERE user_idx =? AND sign_idx =?
+            SELECT * FROM sign WHERE sign_idx =?
             `;
-            selectResult = await db.queryParamArr(selectQuery,[decoded.user_idx,boardIdx]);
-            if(selectResult.length>=1){
+            selectResult = await db.queryParamArr(selectQuery,[boardIdx]);
+            if(selectResult.length<1){
                 res.status(500).send({
-                    message:"Already Exist"
+                    message:"No content"
                 });
             }else{
                 insertQuery = `
@@ -156,12 +156,12 @@ router.post('/add',async(req,res,next)=>{
             break;
             case "3" :
             selectQuery = `
-            SELECT * FROM boycott WHERE user_idx =? AND boycott_idx =?
+            SELECT * FROM boycott WHERE boycott_idx =?
             `;
-            selectResult = await db.queryParamArr(selectQuery,[decoded.user_idx,boardIdx]);
-            if(selectResult.length>=1){
+            selectResult = await db.queryParamArr(selectQuery,[boardIdx]);
+            if(selectResult.length<1){
                 res.status(500).send({
-                    message:"Already Exist"
+                    message:"No content"
                 });
             }else{
                 insertQuery = `
@@ -199,12 +199,12 @@ router.post('/add',async(req,res,next)=>{
             break;
             case "4" :
             selectQuery = `
-            SELECT * FROM donate WHERE user_idx =? AND donate_idx =?
+            SELECT * FROM donate WHERE donate_idx =?
             `;
-            selectResult = await db.queryParamArr(selectQuery,[decoded.user_idx,boardIdx]);
-            if(selectResult.length>=1){
+            selectResult = await db.queryParamArr(selectQuery,[boardIdx]);
+            if(selectResult.length<1){
                 res.status(500).send({
-                    message:"Already Exist"
+                    message:"No content"
                 });
             }else{
                 insertQuery = `
@@ -276,12 +276,12 @@ router.post('/cancel',async(req,res,next)=>{
             case "0" :
             console.log(1);
             selectQuery = `
-            SELECT * FROM finance WHERE user_idx =? AND finance_idx =?
+            SELECT * FROM finance WHERE finance_idx =?
             `;
-            selectResult = await db.queryParamArr(selectQuery,[decoded.user_idx,boardIdx]);
-            if(selectResult.length>=1){
+            selectResult = await db.queryParamArr(selectQuery,[boardIdx]);
+            if(selectResult.length<1){
                 res.status(500).send({
-                    message:"Already Exist"
+                    message:"No content"
                 });
             }else{
                 updateQuery = `
@@ -291,10 +291,6 @@ router.post('/cancel',async(req,res,next)=>{
                 if(!updateResult){
                     res.status(500).send({
                         message:"Internal Server Error"
-                    })
-                }else if(updateResult.length>=1){
-                    res.status(500).send({
-                        message:"Already Exist"
                     })
                 }
                 updateQuery =`UPDATE finance SET finance_like = 
@@ -320,12 +316,12 @@ router.post('/cancel',async(req,res,next)=>{
             break;
             case "1" :
             selectQuery = `
-            SELECT * FROM party WHERE user_idx =? AND party_idx =?
+            SELECT * FROM party WHERE party_idx =?
             `;
-            selectResult = await db.queryParamArr(selectQuery,[decoded.user_idx,boardIdx]);
-            if(selectResult.length>=1){
+            selectResult = await db.queryParamArr(selectQuery,[boardIdx]);
+            if(selectResult.length<1){
                 res.status(500).send({
-                    message:"Already Exist"
+                    message:"No content"
                 });
             }else{
                 updateQuery = `
@@ -335,10 +331,6 @@ router.post('/cancel',async(req,res,next)=>{
                 if(!updateResult){
                     res.status(500).send({
                         message:"Internal Server Error"
-                    })
-                }else if(updateResult.length>=1){
-                    res.status(500).send({
-                        message:"Already Exist"
                     })
                 }
                 updateQuery =`UPDATE party SET party_like = 
@@ -363,12 +355,12 @@ router.post('/cancel',async(req,res,next)=>{
             break;
             case "2" :
             selectQuery = `
-            SELECT * FROM sign WHERE user_idx =? AND sign_idx =?
+            SELECT * FROM sign WHERE sign_idx =?
             `;
-            selectResult = await db.queryParamArr(selectQuery,[decoded.user_idx,boardIdx]);
-            if(selectResult.length>=1){
+            selectResult = await db.queryParamArr(selectQuery,[boardIdx]);
+            if(selectResult.length<1){
                 res.status(500).send({
-                    message:"Already Exist"
+                    message:"No content"
                 });
             }else{
                 updateQuery = `
@@ -378,10 +370,6 @@ router.post('/cancel',async(req,res,next)=>{
                 if(!updateResult){
                     res.status(500).send({
                         message:"Internal Server Error"
-                    })
-                }else if(updateResult.length>=1){
-                    res.status(500).send({
-                        message:"Already Exist"
                     })
                 }
                 updateQuery =`UPDATE sign SET sign_like = 
@@ -406,12 +394,12 @@ router.post('/cancel',async(req,res,next)=>{
             break;
             case "3" :
             selectQuery = `
-            SELECT * FROM boycott WHERE user_idx =? AND boycott_idx =?
+            SELECT * FROM boycott WHERE boycott_idx =?
             `;
-            selectResult = await db.queryParamArr(selectQuery,[decoded.user_idx,boardIdx]);
-            if(selectResult.length>=1){
+            selectResult = await db.queryParamArr(selectQuery,[boardIdx]);
+            if(selectResult.length<1){
                 res.status(500).send({
-                    message:"Already Exist"
+                    message:"No content"
                 });
             }else{
                 updateQuery = `
@@ -421,10 +409,6 @@ router.post('/cancel',async(req,res,next)=>{
                 if(!updateResult){
                     res.status(500).send({
                         message:"Internal Server Error"
-                    })
-                }else if(updateResult.length>=1){
-                    res.status(500).send({
-                        message:"Already Exist"
                     })
                 }
                 updateQuery =`UPDATE boycott SET boycott_like = 
@@ -449,12 +433,12 @@ router.post('/cancel',async(req,res,next)=>{
             break;
             case "4" :
             selectQuery = `
-            SELECT * FROM donate WHERE user_idx =? AND donate_idx =?
+            SELECT * FROM donate WHERE donate_idx =?
             `;
-            selectResult = await db.queryParamArr(selectQuery,[decoded.user_idx,boardIdx]);
-            if(selectResult.length>=1){
+            selectResult = await db.queryParamArr(selectQuery,[boardIdx]);
+            if(selectResult.length<1){
                 res.status(500).send({
-                    message:"Already Exist"
+                    message:"No content"
                 });
             }else{
                 updateQuery = `DELETE FROM bookmark_donate WHERE donate_idx = ? AND  user_idx = ?
@@ -463,10 +447,6 @@ router.post('/cancel',async(req,res,next)=>{
                 if(!updateResult){
                     res.status(500).send({
                         message:"Internal Server Error"
-                    })
-                }else if(updateResult.length>=1){
-                    res.status(500).send({
-                        message:"Already Exist"
                     })
                 }
 
