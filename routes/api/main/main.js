@@ -62,10 +62,63 @@ ORDER BY sign_like desc limit 1;`;
     });
     
 });
-/*
+
 router.get('/new',async(req,res,next)=>{
 
-});*/
+        let populQuery0 = `
+        DROP TABLE new_list
+        `;
+
+        let populQuery1 = `
+        CREATE TABLE new_list AS
+        SELECT finance_title AS title, 
+            finance_idx AS index1,
+            finance_img AS img ,
+            date_format(finance_date,"%Y-%c-%d") AS date ,
+            0 AS 'category' 
+        FROM SMWU.finance;
+        `;
+        let populQuery2 = `
+        INSERT INTO new_list
+        (title, index1, img, date, category)
+        SELECT party_title, party_idx, party_img, date_format(party_date,"%Y-%c-%d"), 1 AS 'category'
+        FROM SMWU.party
+        `;
+        let populQuery3 = `INSERT INTO new_list
+        (title, index1, img, date, category)
+        SELECT sign_title, sign_idx, sign_img, date_format(sign_date,"%Y-%c-%d"), 2 AS 'category'
+        FROM SMWU.sign;`;
+        let populQuery4 = `INSERT INTO new_list
+        (title, index1, img, date, category)
+        SELECT boycott_title, boycott_idx, boycott_img, date_format(boycott_date,"%Y-%c-%d"), 3 AS 'category'
+        FROM SMWU.boycott`;
+        let populQuery5 = `INSERT INTO new_list
+        (title, index1, img, date, category)
+        SELECT donate_title, donate_idx, donate_img, date_format(donate_like,"%Y-%c-%d"), 4 AS 'category'
+        FROM SMWU.donate;`;
+    
+    Result1 = await db.queryParamNone(populQuery0);
+    Result2 = await db.queryParamNone(populQuery1);
+    Result3 = await db.queryParamNone(populQuery2);
+    Result4 = await db.queryParamNone(populQuery3);
+    Result5 = await db.queryParamNone(populQuery4);
+    Result6 = await db.queryParamNone(populQuery5);
+    let selectQuery = `SELECT * FROM new_list ORDER BY date desc limit 6 `;
+    Result7 = await db.queryParamNone(selectQuery);
+    if(!Result7){
+        res.status(500).send({
+            message:"Internal Server Error"
+        });
+    }else{
+        res.status(200).send({
+            message:"Success",
+            data:Result7
+        })
+    }
+
+
+
+});
 
 
 router.get('/popular',async(req,res,next)=>{
